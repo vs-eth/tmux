@@ -9,8 +9,20 @@
   shell: tmux -V | cut -d ' ' -f2
   register: tmux_version
   
-- name: copy system-wide tmux config
+- name: generate system-wide tmux config
   template: src=tmux.conf.j2 dest=/etc/tmux.conf owner=root group=root mode=0644
-
-#- name: copy system-wide bashrc
-  #copy: src=etc_bash.bashrc dest=/etc/bash.bashrc owner=root group=root mode=0644
+  
+- name: ensure tmux powerline config directories exist
+  file: path={{ item }} state=directory owner=root group=root mode=0644
+  with_items:
+    - /etc/xdg/powerline/colorschemes/tmux
+    - /etc/xdg/powerline/themes/tmux
+  
+- name: copy powerline config
+  copy: src=powerline_config.json dest=/etc/xdg/powerline/config.json owner=root group=root mode=0644
+  
+- name: copy tmux powerline config
+  copy: src=powerline_tmux_vsos.json dest=/etc/xdg/powerline/themes/tmux/vsos.json owner=root group=root mode=0644
+  
+- name: copy tmux powerline colorscheme
+  copy: src=powerline_color_tmux_vsos.json dest=/etc/xdg/powerline/colorschemes/tmux/vsos.json owner=root group=root mode=0644
