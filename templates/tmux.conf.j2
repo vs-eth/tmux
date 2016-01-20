@@ -1,0 +1,45 @@
+# Managed by ansible
+
+{% if tmux_version.stdout|float >= 2.1 %}
+# tmux {{ tmux_version.stdout }} is >= 2.1 -> new mouse handling
+set -g mouse on
+
+# Enable mouse mode with M-m
+bind m \
+  set -g mouse on \;\
+  display 'Mouse: ON'
+
+# Disable mouse mode with M-M
+bind M \
+  set -g mouse off \;\
+  display 'Mouse: OFF'
+{% else %}
+# tmux {{ tmux_version.stdout }} is < 2.1 -> old mouse handling
+set -g mode-mouse on
+set -g mouse-resize-pane on
+set -g mouse-select-pane on
+set -g mouse-select-window on
+
+# Enable mouse mode with M-m
+bind m \
+  set -g mode-mouse on \;\
+  display 'Mouse: ON'
+
+# Disable mouse mode with M-M
+bind M \
+  set -g mode-mouse off \;\
+  display 'Mouse: OFF'
+{% endif %}
+
+# Add Alt+x as a second prefix so that Ctrl+b doesn't get overwritten
+set-option -g prefix2 M-x
+
+# Bind x/b to send-prefix so that one only needs to tap the respective key twice when using nested tmux sessions(e.g. ssh)
+bind-key M-x send-prefix
+bind-key M-b send-prefix
+
+# Long histories are sometimes useful...
+set-option -g history-limit 8192
+
+# Activate Powerline. We assume that the most recent version supported in Debian's powerline package is the most recent version of tmux shipped in Debian. Powerline has it's own config...
+source '/usr/share/powerline/bindings/tmux/powerline.conf'

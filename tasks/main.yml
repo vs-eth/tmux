@@ -1,0 +1,16 @@
+---
+- name: install packages
+  apt: name={{ item }} state=present update_cache=yes cache_valid_time=1800
+  with_items:
+    - tmux
+    - powerline
+    
+- name: detect tmux version
+  shell: tmux -V | cut -d ' ' -f2
+  register: tmux_version
+  
+- name: copy system-wide tmux config
+  template: src=tmux.conf.j2 dest=/etc/tmux.conf owner=root group=root mode=0644
+
+#- name: copy system-wide bashrc
+  #copy: src=etc_bash.bashrc dest=/etc/bash.bashrc owner=root group=root mode=0644
