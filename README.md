@@ -9,7 +9,8 @@ Differences to vanilla tmux:
 ## Powerline
 Screenshot:
 ![Screenshot](screenshot.jpg)
-If more than one client is attached, an indicator is displayed(top row).
-### I can't see the symbols
+Right-to-left: Hostname, number of attached clients if bigger than one, current time, system load
+
+### I can't see the symbols!
 Unfortunately, for full powerline support, one needs to patch the local font with certain glyphs or use a pre-patched font(https://github.com/powerline/fonts).
 
