@@ -41,11 +41,15 @@ bind M \
 set-option -g prefix2 M-x
 
 # Bind x/b to send-prefix so that one only needs to tap the respective key twice when using nested tmux sessions(e.g. ssh)
-bind-key M-x send-prefix
-bind-key M-b send-prefix
+bind-key x send-prefix
+bind-key b send-prefix
 
 # Long histories are sometimes useful...
 set-option -g history-limit 8192
+
+# Start counting at one
+set -g base-index 1
+setw -g pane-base-index 1
 
 # Activate Powerline. We assume that the most recent version supported in Debian's powerline package is the most recent version of tmux shipped in Debian. Powerline has it's own config...
 source '/usr/share/powerline/bindings/tmux/powerline.conf'

@@ -2,9 +2,10 @@
 
 Configuration of tmux for SOSETH use.
 Differences to vanilla tmux:
-- M-x as an additional prefix
-- M-x or M-b to send prefix (useful for nested tmux in, say, ssh)
-- mouse support: Click on tabs or use your mouse wheel to scroll. Can be disabled using M-M and reenabled using M-m
+- Alt-x as an additional prefix
+- <prefix>-b and <prefix>-x to send prefix (useful for nested tmux in, say, ssh)
+- mouse support: Click on tabs or use your mouse wheel to scroll. Can be disabled using <prefix>-M and reenabled using <prefix>-m
+- Panes and windows start counting at one instead of zero
 
 ## Powerline
 Screenshot:
