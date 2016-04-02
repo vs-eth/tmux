@@ -8,6 +8,7 @@
 - name: detect tmux version
   shell: tmux -V | cut -d ' ' -f2
   register: tmux_version
+  changed_when: False
   
 - name: generate system-wide tmux config
   template: src=tmux.conf.j2 dest=/etc/tmux.conf owner=root group=root mode=0644
