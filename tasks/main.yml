@@ -1,13 +1,22 @@
 ---
+- set_fact:
+    powerline_packages:
+      - powerline
+  when: ansible_distribution == "Debian"
+
+- set_fact:
+    powerline_packages:
+      - powerline
+      - tmux-powerline
+  when: ansible_distribution == "Fedora"
+
 - name: install packages
-  apt: 
+  package:
     name: "{{ item }}"
     state: present
-    update_cache: yes
-    cache_valid_time: 1800
   with_items:
     - tmux
-    - powerline
+    - "{{ powerline_packages }}"
     
 - name: detect tmux version
   shell: tmux -V | cut -d ' ' -f2

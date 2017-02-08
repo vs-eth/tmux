@@ -1,4 +1,6 @@
 {
+    "common": {
+    },
 	"ext": {
 		"tmux": {
 			"colorscheme": "vsos",
