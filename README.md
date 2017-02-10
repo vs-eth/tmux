@@ -15,3 +15,6 @@ Right-to-left: Hostname, number of attached clients if bigger than one, current 
 ### I can't see the symbols!
 Unfortunately, for full powerline support, one needs to patch the local font with certain glyphs or use a pre-patched font(https://github.com/powerline/fonts).
 
+**Compatibility tested with:**
+ * Debian 8
+ * Fedora 25 Server
