@@ -22,6 +22,7 @@
   shell: tmux -V | cut -d ' ' -f2
   register: tmux_version
   changed_when: False
+  check_mode: no
   
 - name: generate system-wide tmux config
   template:
