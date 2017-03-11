@@ -38,7 +38,7 @@
     state: directory
     owner: root
     group: root
-    mode: 0644
+    mode: 0755
   with_items:
     - /etc/xdg/powerline/colorschemes/tmux
     - /etc/xdg/powerline/themes/tmux
