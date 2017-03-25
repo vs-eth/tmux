@@ -1,6 +1,6 @@
 # Managed by ansible
 
-{% if tmux_version.stdout|float >= 2.1 %}
+{% if tmux_version.stdout|version_compare('2.1', '>=') %}
 # tmux {{ tmux_version.stdout }} is >= 2.1 -> new mouse handling
 set -g mouse on
 
