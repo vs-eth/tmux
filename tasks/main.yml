@@ -2,7 +2,7 @@
 - set_fact:
     powerline_packages:
       - powerline
-  when: ansible_distribution == "Debian"
+    when: ansible_distribution == "Debian" or ansible_distribution == "Ubuntu"
 
 - set_fact:
     powerline_packages:
