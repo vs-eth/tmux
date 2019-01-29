@@ -52,7 +52,7 @@ set -g base-index 1
 setw -g pane-base-index 1
 
 # Activate Powerline. We assume that the most recent version supported in Debian's powerline package is the most recent version of tmux shipped in Debian. Powerline has it's own config...
-{% if ansible_distribution == "Debian" %}
+{% if ansible_distribution == "Debian" or ansible_distribution == "Ubuntu" %}
 source '/usr/share/powerline/bindings/tmux/powerline.conf'
 {% elif ansible_distribution == "Fedora" %}
 source '/usr/share/tmux/powerline.conf'
