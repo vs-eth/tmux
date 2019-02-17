@@ -1,11 +1,13 @@
 ---
 - set_fact:
-    powerline_packages:
+    packages:
+      - tmux
       - powerline
     when: ansible_distribution == "Debian" or ansible_distribution == "Ubuntu"
 
 - set_fact:
-    powerline_packages:
+    packages:
+      - tmux
       - powerline
       - tmux-powerline
   when: ansible_distribution == "Fedora"
@@ -13,11 +15,8 @@
 - name: install packages
   become: True
   package:
-    name: "{{ item }}"
+    name: "{{ packages }}"
     state: present
-  with_items:
-    - tmux
-    - "{{ powerline_packages }}"
     
 - name: detect tmux version
   shell: tmux -V | cut -d ' ' -f2
