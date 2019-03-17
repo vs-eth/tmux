@@ -1,7 +1,5 @@
 # Managed by ansible
 
-{% if tmux_version.stdout is version('2.1', '>=') %}
-# tmux {{ tmux_version.stdout }} is >= 2.1 -> new mouse handling
 set -g mouse on
 
 # Enable mouse mode with M-m
@@ -13,29 +11,6 @@ bind m \
 bind M \
   set -g mouse off \;\
   display 'Mouse: OFF'
-{% else %}
-# tmux {{ tmux_version.stdout }} is < 2.1 -> old mouse handling
-set -g mode-mouse on
-set -g mouse-resize-pane on
-set -g mouse-select-pane on
-set -g mouse-select-window on
-
-# Enable mouse mode with M-m
-bind m \
-  set -g mode-mouse on \;\
-  set -g mouse-resize-pane on \;\
-  set -g mouse-select-pane on \;\
-  set -g mouse-select-window on \;\
-  display 'Mouse: ON'
-
-# Disable mouse mode with M-M
-bind M \
-  set -g mode-mouse off \;\
-  set -g mouse-resize-pane off \;\
-  set -g mouse-select-pane off \;\
-  set -g mouse-select-window off \;\
-  display 'Mouse: OFF'
-{% endif %}
 
 # Add Alt+x as a second prefix so that Ctrl+b doesn't get overwritten
 set-option -g prefix2 M-x
