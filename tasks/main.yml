@@ -1,67 +1,69 @@
 ---
-- set_fact:
-    packages:
+- name: Set facts for Debian/Ubuntu
+  ansible.builtin.set_fact:
+    pkgs:
       - tmux
       - powerline
-    when: ansible_distribution == "Debian" or ansible_distribution == "Ubuntu"
+  when: ansible_distribution == "Debian" or ansible_distribution == "Ubuntu"
 
-- set_fact:
-    packages:
+- name: Set facts for Fedora
+  ansible.builtin.set_fact:
+    pkgs:
       - tmux
       - powerline
       - tmux-powerline
   when: ansible_distribution == "Fedora"
 
-- name: install packages
-  become: True
-  package:
-    name: "{{ packages }}"
+- name: Install packages
+  become: true
+  ansible.builtin.package:
+    name: "{{ pkgs }}"
     state: present
-    
-- name: generate system-wide tmux config
-  become: True
-  template:
+
+- name: Generate system-wide tmux config
+  become: true
+  ansible.builtin.template:
     src: tmux.conf.j2
     dest: /etc/tmux.conf
     owner: root
     group: root
-    mode: 0644
-  
-- name: ensure tmux powerline config directories exist
-  become: True
-  file: 
+    mode: "0644"
+
+- name: Ensure tmux powerline config directories exist
+  become: true
+  ansible.builtin.file:
     path: "{{ item }}"
     state: directory
     owner: root
     group: root
-    mode: 0755
+    mode: "0755"
   with_items:
     - /etc/xdg/powerline/colorschemes/tmux
     - /etc/xdg/powerline/themes/tmux
-  
-- name: copy powerline config
-  become: True
-  copy: 
+
+- name: Copy powerline config
+  become: true
+  ansible.builtin.copy:
     src: powerline_config.json
     dest: /etc/xdg/powerline/config.json
     owner: root
     group: root
-    mode: 0644
-  
-- name: copy tmux powerline config
-  become: True
-  copy:
+    mode: "0644"
+
+- name: Copy tmux powerline config
+  become: true
+  ansible.builtin.copy:
     src: powerline_tmux_vsos.json
     dest: /etc/xdg/powerline/themes/tmux/vsos.json
     owner: root
     group: root
-    mode: 0644
-  
-- name: copy tmux powerline colorscheme
-  become: True
-  copy: 
+    mode: "0644"
+
+- name: Copy tmux powerline colorscheme
+  become: true
+  ansible.builtin.copy:
     src: powerline_color_tmux_vsos.json
     dest: /etc/xdg/powerline/colorschemes/tmux/vsos.json
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
